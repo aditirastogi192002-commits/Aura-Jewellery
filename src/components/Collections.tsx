@@ -2,45 +2,46 @@
 
 import { m } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { scaleReveal, staggerContainer, fadeUp, viewport } from '@/lib/motion'
 
 const COLLECTIONS = [
   {
     id: 'hero',
+    slug: 'executive-ring',
     name: 'The Executive Ring',
     price: 'From ₹3,499',
     gridArea: 'hero',
-    // Silver ring close-up on dark
     img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80',
     imgAlt: 'AURA Executive Ring — sterling silver',
     gradient: 'from-moss via-emerald to-forest',
   },
   {
     id: 'top-right',
+    slug: 'commuter-cuff',
     name: 'The Commuter Cuff',
     price: 'From ₹2,999',
     gridArea: 'top-right',
-    // Silver cuff/bracelet
     img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=600&q=80',
     imgAlt: 'AURA Commuter Cuff — sterling silver bangle',
     gradient: 'from-fern/40 via-moss to-forest',
   },
   {
     id: 'bottom-right',
+    slug: 'meeting-pendant',
     name: 'The Meeting Pendant',
     price: 'From ₹2,499',
     gridArea: 'bottom-right',
-    // Silver pendant necklace
     img: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=600&q=80',
     imgAlt: 'AURA Meeting Pendant — sterling silver necklace',
     gradient: 'from-emerald via-moss to-forest',
   },
   {
     id: 'full',
+    slug: 'friday-set',
     name: 'The Friday Set',
     price: 'From ₹5,999',
     gridArea: 'full',
-    // Jewellery flatlay / set
     img: 'https://images.unsplash.com/photo-1611085583191-a3b181a88401?auto=format&fit=crop&w=1200&q=80',
     imgAlt: 'AURA Friday Set — complete sterling silver collection',
     gradient: 'from-fern/20 via-emerald to-moss',
@@ -78,13 +79,14 @@ export default function Collections() {
           style={{ gridTemplateColumns: '1fr 1fr' }}
         >
           {/* Executive Ring — tall, spans 2 rows */}
-          {COLLECTIONS.slice(0, 3).map(({ id, name, price, img, imgAlt }, i) => (
+          {COLLECTIONS.slice(0, 3).map(({ id, slug, name, price, img, imgAlt }, i) => (
             <m.div
               key={id}
               variants={scaleReveal}
-              className={`relative rounded-xl overflow-hidden group cursor-pointer ${i === 0 ? 'row-span-2' : ''}`}
+              className={`relative rounded-xl overflow-hidden group ${i === 0 ? 'row-span-2' : ''}`}
               style={{ height: i === 0 ? '300px' : '144px' }}
             >
+              <Link href={`/products/${slug}`} className="absolute inset-0 z-10" aria-label={name} />
               <m.div
                 whileHover={{ scale: 1.04 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -99,7 +101,7 @@ export default function Collections() {
                 />
               </m.div>
               <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/30 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-3">
+              <div className="absolute bottom-0 left-0 right-0 p-3 z-20 pointer-events-none">
                 <h3 className="font-display italic text-cream text-base leading-snug">{name}</h3>
                 <p className="font-label text-gold text-[10px] tracking-wide mt-0.5">{price}</p>
               </div>
@@ -109,9 +111,10 @@ export default function Collections() {
           {/* Friday Set — full width */}
           <m.div
             variants={scaleReveal}
-            className="col-span-2 relative rounded-xl overflow-hidden group cursor-pointer"
+            className="col-span-2 relative rounded-xl overflow-hidden group"
             style={{ height: '120px' }}
           >
+            <Link href={`/products/${COLLECTIONS[3].slug}`} className="absolute inset-0 z-10" aria-label={COLLECTIONS[3].name} />
             <m.div
               whileHover={{ scale: 1.04 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -126,7 +129,7 @@ export default function Collections() {
               />
             </m.div>
             <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-3">
+            <div className="absolute bottom-0 left-0 right-0 p-3 z-20 pointer-events-none">
               <h3 className="font-display italic text-cream text-base leading-snug">{COLLECTIONS[3].name}</h3>
               <p className="font-label text-gold text-[10px] tracking-wide mt-0.5">{COLLECTIONS[3].price}</p>
             </div>
@@ -151,13 +154,14 @@ export default function Collections() {
             gridTemplateRows: '240px 240px 180px',
           }}
         >
-          {COLLECTIONS.map(({ id, name, price, gridArea, img, imgAlt }) => (
+          {COLLECTIONS.map(({ id, slug, name, price, gridArea, img, imgAlt }) => (
             <m.div
               key={id}
               variants={scaleReveal}
               style={{ gridArea }}
-              className="relative rounded-xl overflow-hidden group cursor-pointer"
+              className="relative rounded-xl overflow-hidden group"
             >
+              <Link href={`/products/${slug}`} className="absolute inset-0 z-10" aria-label={name} />
               <m.div
                 whileHover={{ scale: 1.04 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -172,7 +176,7 @@ export default function Collections() {
                 />
               </m.div>
               <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/25 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5">
+              <div className="absolute bottom-0 left-0 right-0 p-5 z-20 pointer-events-none">
                 <h3 className="font-display italic text-cream text-xl leading-snug">{name}</h3>
                 <p className="font-label text-gold text-xs tracking-wide mt-1">{price}</p>
               </div>

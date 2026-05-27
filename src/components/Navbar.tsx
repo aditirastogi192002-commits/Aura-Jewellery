@@ -253,6 +253,20 @@ export default function Navbar() {
               )}
             </div>
 
+            {/* Cart icon — mobile only, always visible */}
+            <a
+              href="/cart"
+              aria-label="Shopping bag"
+              className="md:hidden relative flex items-center justify-center text-cream-muted hover:text-gold transition-colors duration-300 p-1"
+            >
+              <ShoppingBag size={20} />
+              {cartCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 rounded-full bg-gold text-forest font-label text-[9px] font-semibold flex items-center justify-center px-0.5 leading-none">
+                  {cartCount > 99 ? '99+' : cartCount}
+                </span>
+              )}
+            </a>
+
             {/* Hamburger — mobile only */}
             <button
               onClick={() => setMenuOpen(true)}
