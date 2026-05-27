@@ -270,11 +270,12 @@ export default function Navbar() {
         {menuOpen && (
           <m.div
             key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-[100] bg-forest/98 flex flex-col"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            className="fixed inset-0 z-[100] flex flex-col"
+            style={{ backgroundColor: '#0D1F1A' }}
           >
             {/* Close button */}
             <div className="flex justify-between items-center p-6">
