@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   BRAND BASE
+   ========================================= */
+:root {
+  --background: #0B1F12;
+  --foreground: #F5F0E8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  cursor: none; /* custom cursor takes over */
+}
+
+/* =========================================
+   GRAIN TEXTURE OVERLAY
+   ========================================= */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR
+   ========================================= */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1F12;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A96E;
+  border-radius: 2px;
+}
+
+/* =========================================
+   SELECTION
+   ========================================= */
+::selection {
+  background: rgba(201, 169, 110, 0.25);
+  color: #F5F0E8;
+}
+
+/* =========================================
+   MARQUEE ANIMATION
+   ========================================= */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* =========================================
+   SHIMMER PLACEHOLDER
+   ========================================= */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #1C4A2A 25%, #2D6B40 50%, #1C4A2A 75%);
+  background-size: 800px 100%;
+  animation: shimmer 2.2s infinite;
+}
+
+/* =========================================
+   FLOAT ANIMATION (badges)
+   ========================================= */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* =========================================
+   INTERACTIVE ELEMENT POINTER RESET
+   (custom cursor replaces native)
+   ========================================= */
+a, button, [role="button"] {
+  cursor: none;
+}
+
+/* =========================================
+   UTILITY: NAV UNDERLINE
+   ========================================= */
+.nav-underline {
+  position: relative;
+}
+.nav-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #C9A96E;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.nav-underline:hover::after {
+  transform: scaleX(1);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
